@@ -67,7 +67,7 @@
 
   <?php if (isset($_POST["submit"])) { 
 
-  // Faz as validações dos inputs
+  // Faz as validações dos inputs e emite as querys
   // Essa validação nos permitirá que os campos do form não sejam obrigatórios
   if (!empty($_POST["nome"])) {
     $nomeQuery = "nome LIKE '%{$_POST["nome"]}%'";
@@ -91,6 +91,7 @@
   try {
     $db = Database::getInstance();
     $con = $db->getConnection();
+    // Query de busca no banco de dados
     $query = "SELECT * FROM db_teste.tb_teste WHERE " . $nomeQuery . $sexoQuery . $cargoQuery;
     $stmt = $con->prepare($query);
     $stmt->execute();
